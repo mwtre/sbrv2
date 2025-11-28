@@ -17,13 +17,25 @@ export default function ClientBody({
       // Suppress known errors that don't affect functionality
       const errorMessage = event.reason?.message || String(event.reason || '');
       const errorStack = event.reason?.stack || '';
+      const errorCode = event.reason?.code;
+      const errorString = JSON.stringify(event.reason || '');
       
-      // Suppress errors from same-runtime, inject.js, or generic object errors
+      // Suppress errors from:
+      // - Browser extensions (inject.js, chrome-extension)
+      // - same-runtime issues
+      // - Stripe iframe errors (JSON-RPC errors)
+      // - Azure Application Insights (blocked by ad blockers)
+      // - Generic object errors without useful info
       if (
         errorStack.includes('inject.js') ||
         errorStack.includes('same-runtime') ||
+        errorStack.includes('chrome-extension') ||
         errorMessage.includes('same-runtime') ||
-        (event.reason && typeof event.reason === 'object' && !event.reason.message && !event.reason.stack)
+        errorMessage.includes('chrome-extension') ||
+        errorCode === -32603 || // JSON-RPC internal error (often from Stripe iframes)
+        errorString.includes('applicationinsights') ||
+        errorString.includes('chrome-extension') ||
+        (event.reason && typeof event.reason === 'object' && !event.reason.message && !event.reason.stack && !errorCode)
       ) {
         event.preventDefault();
         return;

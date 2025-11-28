@@ -51,7 +51,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-zinc-50 to-white relative">
+    <main className="min-h-screen bg-gradient-to-b from-zinc-50 to-white relative w-full overflow-x-hidden">
       {/* Bubble Background Effect */}
       <BubbleBackground />
       
