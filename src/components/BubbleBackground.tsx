@@ -83,9 +83,10 @@ export default function BubbleBackground() {
     }
 
     // Cleanup function
+    const currentBubblesRef = bubblesRef.current;
     return () => {
-      if (bubblesRef.current) {
-        bubblesRef.current.innerHTML = "";
+      if (currentBubblesRef) {
+        currentBubblesRef.innerHTML = "";
       }
     };
   }, [isMounted]);

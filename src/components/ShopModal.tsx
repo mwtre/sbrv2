@@ -386,7 +386,7 @@ export default function ShopModal({ open, onOpenChange }: ShopModalProps) {
       // In production, you would need a separate backend or use a service like Vercel
       // For now, we'll skip the API call and show the toast directly
       const basePath = typeof window !== 'undefined' ? window.location.pathname.split('/').slice(0, -1).join('/') || '' : '';
-      let response = null;
+      let response: Response | null = null;
       
       // Only try API call in development (when running locally)
       if (process.env.NODE_ENV === 'development') {
@@ -406,13 +406,20 @@ export default function ShopModal({ open, onOpenChange }: ShopModalProps) {
         }
       }
 
-      if (response.ok) {
+      if (response && response.ok) {
         const { sessionId } = await response.json();
         const stripe = await stripePromise;
         if (stripe) {
-          await stripe.redirectToCheckout({ sessionId });
+          // Type assertion for redirectToCheckout method
+          const stripeWithCheckout = stripe as typeof stripe & {
+            redirectToCheckout: (options: { sessionId: string }) => Promise<{ error?: Error }>;
+          };
+          if ('redirectToCheckout' in stripeWithCheckout) {
+            await stripeWithCheckout.redirectToCheckout({ sessionId });
+          }
         }
       } else {
+        // For static export (GitHub Pages), show success toast directly
         toast.success("Checkout initiated!", {
           description: `Purchase Type: ${purchaseType} | Items: ${cart.length} | Total: CHF ${getTotal().toFixed(2)}`,
         });
