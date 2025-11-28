@@ -256,7 +256,7 @@ export default function Web3Modal({ open, onOpenChange }: Web3ModalProps) {
             </div>
           )}
         </div>
-        <div className="overflow-y-auto max-h-[calc(95vh-180px)] sm:max-h-[calc(90vh-180px)] p-3 sm:p-4 md:p-6">
+        <div className="overflow-y-auto max-h-[calc(100vh-200px)] sm:max-h-[calc(90vh-180px)] p-3 sm:p-4 md:p-6">
           {/* Tab Navigation */}
           <div className="flex gap-1 sm:gap-2 mb-4 sm:mb-6 border-b border-zinc-200 overflow-x-auto">
             <button
