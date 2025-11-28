@@ -14,6 +14,7 @@ import { Droplet, Plus, Minus, ShoppingCart, CreditCard, X, Building2, Calendar,
 import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
 import { toast } from "sonner";
+import { getImagePath } from "@/lib/image-utils";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "");
 
@@ -455,7 +456,7 @@ export default function ShopModal({ open, onOpenChange }: ShopModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-6xl max-h-[90vh] overflow-hidden p-0 w-[95vw] sm:w-full">
+      <DialogContent className="max-w-6xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden p-0 w-full h-full sm:h-auto sm:w-[95vw] sm:max-w-6xl fixed inset-0 sm:inset-auto sm:left-[50%] sm:top-[50%] sm:translate-x-[-50%] sm:translate-y-[-50%] rounded-none sm:rounded-2xl">
         <div className="p-4 sm:p-6 border-b border-zinc-200">
           <DialogHeader>
             <DialogTitle className="text-2xl sm:text-3xl font-bold">
@@ -466,7 +467,7 @@ export default function ShopModal({ open, onOpenChange }: ShopModalProps) {
             </DialogDescription>
           </DialogHeader>
         </div>
-        <div className="overflow-y-auto max-h-[calc(90vh-120px)] p-4 sm:p-6">
+        <div className="overflow-y-auto max-h-[calc(95vh-120px)] sm:max-h-[calc(90vh-120px)] p-3 sm:p-4 md:p-6">
           {/* Purchase Type Selection */}
           <div className="flex gap-1 sm:gap-2 mb-4 sm:mb-6">
             <Button
@@ -521,7 +522,7 @@ export default function ShopModal({ open, onOpenChange }: ShopModalProps) {
                       >
                   <div className="aspect-square relative overflow-hidden">
                     <Image
-                      src={product.image}
+                      src={getImagePath(product.image)}
                       alt={product.name}
                       fill
                       className="object-cover"
@@ -541,7 +542,7 @@ export default function ShopModal({ open, onOpenChange }: ShopModalProps) {
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-20 h-20 rounded-lg overflow-hidden relative">
                     <Image
-                      src={privateProducts.find((p) => p.id === selectedProduct)?.image || ""}
+                      src={getImagePath(privateProducts.find((p) => p.id === selectedProduct)?.image || "")}
                       alt=""
                       fill
                       className="object-cover"
@@ -695,7 +696,7 @@ export default function ShopModal({ open, onOpenChange }: ShopModalProps) {
                       <Card key={eventPackage.id} className="overflow-hidden">
                         <div className="aspect-video relative overflow-hidden">
                           <Image
-                            src={eventPackage.image}
+                            src={getImagePath(eventPackage.image)}
                             alt={eventPackage.name}
                             fill
                             className="object-cover"

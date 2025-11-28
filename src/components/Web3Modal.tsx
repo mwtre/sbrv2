@@ -230,7 +230,7 @@ export default function Web3Modal({ open, onOpenChange }: Web3ModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-6xl max-h-[90vh] overflow-hidden p-0 w-[95vw] sm:w-full">
+      <DialogContent className="max-w-6xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden p-0 w-full h-full sm:h-auto sm:w-[95vw] sm:max-w-6xl fixed inset-0 sm:inset-auto sm:left-[50%] sm:top-[50%] sm:translate-x-[-50%] sm:translate-y-[-50%] rounded-none sm:rounded-2xl">
         <div className="p-4 sm:p-6 border-b border-zinc-200 bg-gradient-to-r from-zinc-900 to-zinc-700 text-white">
           <DialogHeader>
             <DialogTitle className="text-2xl sm:text-3xl font-bold flex items-center gap-2 sm:gap-3">
@@ -256,7 +256,7 @@ export default function Web3Modal({ open, onOpenChange }: Web3ModalProps) {
             </div>
           )}
         </div>
-        <div className="overflow-y-auto max-h-[calc(90vh-180px)] p-4 sm:p-6">
+        <div className="overflow-y-auto max-h-[calc(95vh-180px)] sm:max-h-[calc(90vh-180px)] p-3 sm:p-4 md:p-6">
           {/* Tab Navigation */}
           <div className="flex gap-1 sm:gap-2 mb-4 sm:mb-6 border-b border-zinc-200 overflow-x-auto">
             <button
