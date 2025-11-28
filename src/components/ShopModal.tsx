@@ -382,7 +382,10 @@ export default function ShopModal({ open, onOpenChange }: ShopModalProps) {
 
     setIsProcessing(true);
     try {
-      const response = await fetch("/api/create-checkout-session", {
+      // For GitHub Pages static export, API routes are not available
+      // In production, you would need a separate backend or use a service like Vercel
+      const basePath = process.env.NODE_ENV === 'production' ? '/sbrv2' : '';
+      const response = await fetch(`${basePath}/api/create-checkout-session`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -391,7 +394,7 @@ export default function ShopModal({ open, onOpenChange }: ShopModalProps) {
           items: cart,
           purchaseType,
         }),
-      });
+      }).catch(() => null);
 
       if (response.ok) {
         const { sessionId } = await response.json();

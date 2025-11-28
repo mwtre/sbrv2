@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# San Bernardino Alpine Waters
+
+A modern, responsive website for San Bernardino Alpine Waters featuring e-commerce shop, Web3 integration, and beautiful animations.
+
+## Features
+
+- 🛍️ **Shop Modal** - Private, Business, and Events purchase options with Stripe integration
+- 🔷 **Web3 Modal** - Water NFTs, BTC Staking Pools, and Global Reserve
+- 🎨 **Beautiful Animations** - Scroll-triggered animations and bubble background effect
+- 📱 **Mobile Optimized** - Fully responsive design for all devices
+- ⚡ **Performance** - Optimized images, lazy loading, and code splitting
+- 🎯 **Smooth Scrolling** - Navigation with smooth scroll to sections
+
+## Tech Stack
+
+- Next.js 15.3.2 (App Router)
+- React 18.3.1
+- TypeScript 5.8.3
+- Tailwind CSS 3.4.17
+- Framer Motion (animations)
+- Sonner (toast notifications)
+- Radix UI (components)
+- Stripe (payments)
+- Lucide React (icons)
 
 ## Getting Started
 
-First, run the development server:
+### Installation
+
+```bash
+npm install
+```
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+This will create a static export in the `out` directory, ready for GitHub Pages deployment.
 
-To learn more about Next.js, take a look at the following resources:
+## GitHub Pages Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is configured for GitHub Pages deployment:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. The repository is set up with GitHub Actions workflow
+2. On every push to `main`, the site is automatically built and deployed
+3. The site will be available at: `https://mwtre.github.io/sbrv2/`
 
-## Deploy on Vercel
+### Manual Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+If you prefer manual deployment:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+# The out/ directory contains the static files
+# Upload the contents of out/ to your GitHub Pages branch
+```
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── api/          # API routes (for Stripe checkout)
+│   ├── layout.tsx    # Root layout
+│   ├── page.tsx      # Main page
+│   └── globals.css   # Global styles
+├── components/
+│   ├── ShopModal.tsx      # Shopping modal
+│   ├── Web3Modal.tsx      # Web3 features modal
+│   ├── BubbleBackground.tsx  # Animated background
+│   ├── AnimatedSection.tsx   # Scroll animations
+│   └── ui/           # UI components (shadcn)
+└── lib/
+    └── utils.ts       # Utility functions
+```
+
+## Environment Variables
+
+For production, you'll need to set up:
+
+- `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` - Stripe publishable key
+- `STRIPE_SECRET_KEY` - Stripe secret key (server-side only)
+
+## License
+
+© 2025 FONTI SAN BERNARDINO

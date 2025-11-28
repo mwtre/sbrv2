@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  allowedDevOrigins: ["*.preview.same-app.com"],
+  output: 'export',
+  trailingSlash: true,
   images: {
     unoptimized: true,
     domains: [
@@ -32,6 +33,8 @@ const nextConfig = {
       },
     ],
   },
+  basePath: process.env.NODE_ENV === 'production' ? '/sbrv2' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/sbrv2' : '',
 };
 
 module.exports = nextConfig;
