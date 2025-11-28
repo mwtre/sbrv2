@@ -384,17 +384,27 @@ export default function ShopModal({ open, onOpenChange }: ShopModalProps) {
     try {
       // For GitHub Pages static export, API routes are not available
       // In production, you would need a separate backend or use a service like Vercel
-      const basePath = process.env.NODE_ENV === 'production' ? '/sbrv2' : '';
-      const response = await fetch(`${basePath}/api/create-checkout-session`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          items: cart,
-          purchaseType,
-        }),
-      }).catch(() => null);
+      // For now, we'll skip the API call and show the toast directly
+      const basePath = typeof window !== 'undefined' ? window.location.pathname.split('/').slice(0, -1).join('/') || '' : '';
+      let response = null;
+      
+      // Only try API call in development (when running locally)
+      if (process.env.NODE_ENV === 'development') {
+        try {
+          response = await fetch(`${basePath}/api/create-checkout-session`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              items: cart,
+              purchaseType,
+            }),
+          });
+        } catch (error) {
+          console.log('API not available (expected for static export)');
+        }
+      }
 
       if (response.ok) {
         const { sessionId } = await response.json();

@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production';
+const basePath = process.env.BASE_PATH || (isProd ? '/sbrv2' : '');
+
 const nextConfig = {
   output: 'export',
   trailingSlash: true,
+  basePath: basePath,
+  assetPrefix: basePath,
   images: {
     unoptimized: true,
     domains: [
@@ -33,8 +38,6 @@ const nextConfig = {
       },
     ],
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/sbrv2' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/sbrv2' : '',
 };
 
 module.exports = nextConfig;
