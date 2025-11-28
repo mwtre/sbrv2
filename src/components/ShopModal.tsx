@@ -467,18 +467,18 @@ export default function ShopModal({ open, onOpenChange }: ShopModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-6xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden p-0 w-full h-full sm:h-auto sm:w-[95vw] sm:max-w-6xl fixed inset-0 sm:inset-auto sm:left-[50%] sm:top-[50%] sm:translate-x-[-50%] sm:translate-y-[-50%] rounded-none sm:rounded-2xl">
-        <div className="p-4 sm:p-6 border-b border-zinc-200">
+      <DialogContent className="max-w-6xl max-h-[100vh] sm:max-h-[90vh] overflow-hidden p-0 w-full h-full sm:h-auto sm:w-[95vw] sm:max-w-6xl !fixed !inset-0 sm:!inset-auto sm:!left-[50%] sm:!top-[50%] sm:!translate-x-[-50%] sm:!translate-y-[-50%] !translate-x-0 !translate-y-0 sm:!translate-x-[-50%] sm:!translate-y-[-50%] rounded-none sm:rounded-2xl m-0 sm:m-auto">
+        <div className="p-4 sm:p-6 border-b border-zinc-200 flex-shrink-0">
           <DialogHeader>
-            <DialogTitle className="text-2xl sm:text-3xl font-bold">
+            <DialogTitle className="text-xl sm:text-2xl md:text-3xl font-bold">
               San Bernardino Shop
             </DialogTitle>
-            <DialogDescription className="text-sm sm:text-base">
+            <DialogDescription className="text-xs sm:text-sm md:text-base">
               Choose your purchase type and select your preferred Alpine waters
             </DialogDescription>
           </DialogHeader>
         </div>
-        <div className="overflow-y-auto max-h-[calc(95vh-120px)] sm:max-h-[calc(90vh-120px)] p-3 sm:p-4 md:p-6">
+        <div className="overflow-y-auto max-h-[calc(100vh-140px)] sm:max-h-[calc(90vh-120px)] p-3 sm:p-4 md:p-6">
           {/* Purchase Type Selection */}
           <div className="flex gap-1 sm:gap-2 mb-4 sm:mb-6">
             <Button
