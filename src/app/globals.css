@@ -69,7 +69,7 @@ html {
   scroll-behavior: smooth;
   /* Prevent layout shift from scrollbar - reserve space for scrollbar */
   scrollbar-gutter: stable;
-  /* Fallback: always show scrollbar to prevent layout shift */
+  /* Always show vertical scrollbar to prevent layout shift */
   overflow-y: scroll;
 }
 
@@ -87,21 +87,6 @@ body {
   position: relative;
   /* Prevent horizontal scrollbar from appearing */
   max-width: 100vw;
-}
-
-/* For browsers that don't support scrollbar-gutter */
-@supports not (scrollbar-gutter: stable) {
-  html {
-    /* Calculate width accounting for scrollbar (typically 15-17px) */
-    width: calc(100% - 17px);
-  }
-  
-  /* On systems without scrollbar, restore full width */
-  @media (hover: none) and (pointer: coarse) {
-    html {
-      width: 100%;
-    }
-  }
 }
 
 @layer utilities {
