@@ -16,7 +16,16 @@ import Image from "next/image";
 import { toast } from "sonner";
 import { getImagePath } from "@/lib/image-utils";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "");
+// Only initialize Stripe if we have a publishable key
+const getStripePromise = () => {
+  const key = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+  if (!key || key.trim() === '') {
+    return null;
+  }
+  return loadStripe(key);
+};
+
+const stripePromise = typeof window !== 'undefined' ? getStripePromise() : null;
 
 type PurchaseType = "private" | "business" | "events";
 type EventCategory = "work" | "cultural" | "party";
@@ -409,14 +418,16 @@ export default function ShopModal({ open, onOpenChange }: ShopModalProps) {
 
       if (response && response.ok) {
         const { sessionId } = await response.json();
-        const stripe = await stripePromise;
-        if (stripe) {
-          // Type assertion for redirectToCheckout method
-          const stripeWithCheckout = stripe as typeof stripe & {
-            redirectToCheckout: (options: { sessionId: string }) => Promise<{ error?: Error }>;
-          };
-          if ('redirectToCheckout' in stripeWithCheckout) {
-            await stripeWithCheckout.redirectToCheckout({ sessionId });
+        if (stripePromise) {
+          const stripe = await stripePromise;
+          if (stripe) {
+            // Type assertion for redirectToCheckout method
+            const stripeWithCheckout = stripe as typeof stripe & {
+              redirectToCheckout: (options: { sessionId: string }) => Promise<{ error?: Error }>;
+            };
+            if ('redirectToCheckout' in stripeWithCheckout) {
+              await stripeWithCheckout.redirectToCheckout({ sessionId });
+            }
           }
         }
       } else {
@@ -520,13 +531,17 @@ export default function ShopModal({ open, onOpenChange }: ShopModalProps) {
                           setSelectedSize("");
                         }}
                       >
-                  <div className="aspect-square relative overflow-hidden">
+                  <div className="aspect-square relative overflow-hidden bg-zinc-100">
                     <Image
                       src={getImagePath(product.image)}
                       alt={product.name}
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      onError={(e) => {
+                        // Fallback if image fails to load
+                        console.error('Image load error:', product.image);
+                      }}
                     />
                   </div>
                         <div className="p-4">

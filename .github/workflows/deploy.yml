@@ -36,6 +36,7 @@ jobs:
         env:
           NODE_ENV: production
           BASE_PATH: /sbrv2
+          NEXT_PUBLIC_BASE_PATH: /sbrv2
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
