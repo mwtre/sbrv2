@@ -75,7 +75,6 @@ const privateProducts: PrivateProduct[] = [
     image: "/pure-spring-removebg-preview.png",
     sizes: [
       { size: "250ml", price: 2.5 },
-      { size: "500ml", price: 4.5 },
       { size: "750ml", price: 6.5 },
     ],
   },
@@ -86,7 +85,6 @@ const privateProducts: PrivateProduct[] = [
     image: "/sparkling-crest-removebg-preview.png",
     sizes: [
       { size: "250ml", price: 2.8 },
-      { size: "500ml", price: 5.0 },
       { size: "750ml", price: 7.0 },
     ],
   },
@@ -97,7 +95,6 @@ const privateProducts: PrivateProduct[] = [
     image: "/alpine-burst-removebg-preview.png",
     sizes: [
       { size: "250ml", price: 3.0 },
-      { size: "500ml", price: 5.5 },
       { size: "750ml", price: 7.5 },
     ],
   },
@@ -157,7 +154,7 @@ const eventPackages: EventPackage[] = [
     basePrice: 250,
     includes: [
       "Water stations setup",
-      "500ml bottles (50 units)",
+      "750ml bottles (50 units)",
       "Professional service staff",
       "Cleanup service",
     ],
@@ -215,7 +212,7 @@ const eventPackages: EventPackage[] = [
     basePrice: 200,
     includes: [
       "Water stations",
-      "500ml bottles (40 units)",
+      "750ml bottles (40 units)",
       "Basic service",
       "Cleanup",
     ],
@@ -577,7 +574,7 @@ export default function ShopModal({ open, onOpenChange }: ShopModalProps) {
                       <div className="space-y-4">
                         <div>
                           <label className="text-sm font-medium mb-2 block">Size</label>
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-2 gap-2">
                       {privateProducts
                         .find((p) => p.id === selectedProduct)
                         ?.sizes.map((size) => (

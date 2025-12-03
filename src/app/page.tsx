@@ -9,6 +9,7 @@ import Image from "next/image";
 import AnimatedSection from "@/components/AnimatedSection";
 import { ModalSkeleton } from "@/components/ui/modal-skeleton";
 import BubbleBackground from "@/components/BubbleBackground";
+import { getImagePath } from "@/lib/image-utils";
 
 const ShopModal = dynamic(() => import("@/components/ShopModal"), {
   loading: () => <ModalSkeleton />,
@@ -75,9 +76,15 @@ export default function Home() {
 
             {/* Center: Logo */}
             <div className="absolute left-1/2 -translate-x-1/2">
-              <div className="flex flex-col items-center">
-                <div className="w-8 h-8 bg-zinc-900 rounded-sm mb-1" />
-                <h1 className="text-xl font-bold tracking-wider">SAN BERNARDINO</h1>
+              <div className="flex items-center justify-center">
+                <Image
+                  src={getImagePath("/logo-sanbernardino (2).png")}
+                  alt="San Bernardino Logo"
+                  width={180}
+                  height={60}
+                  className="h-12 sm:h-16 w-auto object-contain"
+                  priority
+                />
               </div>
             </div>
 
@@ -133,11 +140,13 @@ export default function Home() {
             {/* Sidebar Header */}
             <div className="p-6 border-b border-zinc-200">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-zinc-900 rounded-lg" />
-                <div>
-                  <h2 className="font-bold text-lg">San Bernardino</h2>
-                  <p className="text-xs text-zinc-500">Alpine Waters</p>
-                </div>
+                <Image
+                  src={getImagePath("/logo-sanbernardino (2).png")}
+                  alt="San Bernardino Logo"
+                  width={120}
+                  height={40}
+                  className="h-10 w-auto object-contain"
+                />
               </div>
             </div>
 
